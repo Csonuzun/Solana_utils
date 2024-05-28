@@ -12,26 +12,30 @@ passphrase = ""  # Your passphrase if you have one
 mnemo = Mnemonic("english")
 seed_bytes = mnemo.to_seed(mnemonic, passphrase)
 
-# Define the derivation path
-derivation_path = "m/44'/501'/0'/0'"
+# Number of keypairs to generate
+num_keypairs = 5
 
-# Generate keypair using the seed and derivation path
-keypair = Keypair.from_seed_and_derivation_path(seed_bytes[:64], derivation_path)
+for i in range(num_keypairs):
+    # Define the derivation path for the current keypair
+    derivation_path = f"m/44'/501'/0'/0/{i}"
 
-# Get the public key
-public_key_bytes = bytes(keypair.pubkey())
+    # Generate keypair using the seed and derivation path
+    keypair = Keypair.from_seed_and_derivation_path(seed_bytes[:64], derivation_path)
 
-# Convert public key to base58 format
-public_key_base58 = base58.b58encode(public_key_bytes).decode('utf-8')
+    # Get the public key
+    public_key_bytes = bytes(keypair.pubkey())
 
-# Convert private key to a list of integers (format expected by Phantom)
-private_key_list = keypair.to_bytes_array()[:32]
+    # Convert public key to base58 format
+    public_key_base58 = base58.b58encode(public_key_bytes).decode('utf-8')
 
-# Print keys
-print(f"Address: {public_key_base58}")
-print(f"Public Key: {public_key_base58}")
-print(f"Private Key: {private_key_list}")
+    # Convert private key to a list of integers (format expected by Phantom)
+    private_key_list = keypair.to_bytes_array()[:32]
 
-# Export private key in JSON format for Phantom
-private_key_json = json.dumps(private_key_list)
-print(f"Private Key JSON for Phantom: {private_key_json}")
+    # Print keys
+    print(f"Address {i}: {public_key_base58}")
+    print(f"Public Key {i}: {public_key_base58}")
+    print(f"Private Key {i}: {private_key_list}")
+
+    # Export private key in JSON format for Phantom
+    private_key_json = json.dumps(private_key_list)
+    print(f"Private Key JSON {i} for Phantom: {private_key_json}\n")
