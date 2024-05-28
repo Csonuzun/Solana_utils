@@ -16,7 +16,7 @@ pip install solders mnemonic bip_utils base58
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-repo/solana-keypair-generator.git
+   git clone https://github.com/Csonuzun/Solana_utils.git
    cd solana-keypair-generator
    ```
 
