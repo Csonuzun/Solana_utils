@@ -32,10 +32,6 @@ for i in range(num_keypairs):
     private_key_list = keypair.to_bytes_array()[:32]
 
     # Print keys
-    print(f"Address {i}: {public_key_base58}")
     print(f"Public Key {i}: {public_key_base58}")
     print(f"Private Key {i}: {private_key_list}")
 
-    # Export private key in JSON format for Phantom
-    private_key_json = json.dumps(private_key_list)
-    print(f"Private Key JSON {i} for Phantom: {private_key_json}\n")
